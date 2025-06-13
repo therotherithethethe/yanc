@@ -1,0 +1,41 @@
+# /etc/nixos/configuration.nix
+{ config, lib, pkgs, inputs, ... }:
+
+{
+  imports = [
+    ./hardware-configuration.nix
+    
+    # This is the correct module that provides the `home-manager` options
+    inputs.home-manager.nixosModules.home-manager
+  ];
+
+  # --- Global Home Manager Settings ---
+  # These settings apply to all users managed by Home Manager.
+  home-manager = {
+    # This is the CORRECT location for extraSpecialArgs.
+    # It passes `inputs` to every Home Manager module.
+    extraSpecialArgs = { inherit inputs; }; 
+
+    # Recommended setting: ensures Home Manager uses the same `pkgs`
+    # as your NixOS system. This is simpler and more efficient.
+    useGlobalPkgs = true;
+
+    # --- Per-User Home Manager Settings ---
+    users.zhenya = {
+      # You no longer need to pass `pkgs = pkgs;` because of `useGlobalPkgs = true;`
+      # The `extraSpecialArgs` option does NOT go here.
+      imports = [ ./home.nix ];
+    };
+  };
+
+
+  # System user definition
+  users.users.zhenya = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
+  };
+
+
+  # ... other system settings ...
+  system.stateVersion = "25.05"; # Changed to latest stable release, but "25.05" is fine.
+}
