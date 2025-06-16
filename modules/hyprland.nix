@@ -3,7 +3,18 @@
 {
     wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    package = null; 
+    portalPackage = null;
+    systemd.enable = false;
+    
+    settings = {
+      "$mod" = "SUPER";
+      
+      bind = [
+        "$mod, RETURN, exec, kitty"
+        "$mod, Q, killactive,"
+        "$mod, D, exec, wofi --show-drun"
+      ];
+    };
   };
 }

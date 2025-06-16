@@ -7,4 +7,7 @@
     ./modules/git.nix
   ];
   home.stateVersion = "25.05";
+  programs.btop.enable = true;
+  programs.kitty.enable = true;
+  programs.wofi.enable = true;
 }
