@@ -10,4 +10,9 @@
   programs.btop.enable = true;
   programs.kitty.enable = true;
   programs.wofi.enable = true;
+  programs.waybar = {
+    enable = true;
+    systemd.enable = true;
+  };
+  home.pointerCursor.hyprcursor.enable = true;
 }
