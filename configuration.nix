@@ -46,8 +46,8 @@
 };
 
   hardware.opengl.enable = true;
-  boot.initrd.kernelModules = [ "vmwgfx" ];
-  services.xserver.videoDrivers = [ "vmwgfx" ];
+  #boot.initrd.kernelModules = [ "vmwgfx" ];
+  #services.xserver.videoDrivers = [ "vmwgfx" ];
 
   programs.uwsm = {
     enable = true;
