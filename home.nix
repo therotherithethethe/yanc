@@ -14,5 +14,10 @@
     enable = true;
     systemd.enable = true;
   };
-  home.pointerCursor.hyprcursor.enable = true;
+home.pointerCursor = {
+  name = "Bibata-Modern-Ice";
+  package = pkgs.bibata-cursors;
+  size = 50;
+  hyprcursor.enable = true;
+};
 }
