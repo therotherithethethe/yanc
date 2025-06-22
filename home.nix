@@ -20,4 +20,10 @@ home.pointerCursor = {
   size = 50;
   hyprcursor.enable = true;
 };
+  home.sessionVariables = {
+  # This tells all Qt applications to try running on Wayland first
+    QT_QPA_PLATFORM = "wayland";
+  # Fixes blurry fonts on some apps
+    NIXOS_OZONE_WL = "1";
+  };
 }
