@@ -22,8 +22,16 @@ home.pointerCursor = {
 };
   home.sessionVariables = {
   # This tells all Qt applications to try running on Wayland first
-    QT_QPA_PLATFORM = "wayland";
+
+#    QT_QPA_PLATFORM = "wayland";
   # Fixes blurry fonts on some apps
     NIXOS_OZONE_WL = "1";
+  };
+  programs.vesktop.enable = true;
+  services.gammastep = {
+    enable = true;
+    provider = "manual";
+    latitude = "48.72415410089862";
+    longitude = "21.254198050207247";
   };
 }

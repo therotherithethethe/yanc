@@ -36,6 +36,8 @@
  #   useXkbConfig = true; # use xkb.options in tty.
    };
 
+
+ # services.power-profiles-daemon.enable = true;
   services.greetd = {
     enable = true;
     settings = {
@@ -69,6 +71,8 @@
      wget
      git
      neofetch
+     #power-profiles-daemon
+     lenovo-legion
    ];
 nixpkgs.config.allowUnfree = true;
 services.xserver.videoDrivers = ["nvidia"];
@@ -82,6 +86,7 @@ hardware.nvidia = {
 
   prime = {
     offload.enable = true;
+    offload.enableOffloadCmd = true;
 
     intelBusId = "PCI:0:2:0";
     nvidiaBusId = "PCI:1:0:0";
