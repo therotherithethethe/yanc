@@ -5,6 +5,7 @@
   imports = [ 
     ./modules/hyprland.nix
     ./modules/git.nix
+    ./modules/qt.nix
   ];
   home.stateVersion = "25.05";
   programs.btop.enable = true;

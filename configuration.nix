@@ -72,7 +72,10 @@
      git
      neofetch
      #power-profiles-daemon
-     lenovo-legion
+     #lenovo-legion
+     xfce.thunar
+     lxappearance
+     catppuccin
    ];
 nixpkgs.config.allowUnfree = true;
 services.xserver.videoDrivers = ["nvidia"];
