@@ -10,6 +10,8 @@
     hyprland = {
       url = "github:hyprwm/Hyprland";
     };
+    stylix.url = "github:danth/stylix";
+    catppuccin.url = "github:catppuccin/nix";
   };
   
 
