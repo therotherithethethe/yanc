@@ -1,9 +1,17 @@
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 {
   imports = [
-  ./hardware-configuration.nix
-  inputs.home-manager.nixosModules.home-manager 
-];
+    ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.home-manager
+    ./uhardware.nix
+    ./uhardware-options.nix
+  ];
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
@@ -13,9 +21,13 @@
       imports = [ ./home.nix ];
     };
   };
+
   users.users.zhenya = {
     isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager"];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ];
   };
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.enable = true;
@@ -23,21 +35,23 @@
   boot.loader.grub.device = "nodev";
   boot.loader.grub.useOSProber = true;
   networking.hostName = "penis"; # Define your hostname.
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  programs.fish.enable = true;
+  users.defaultUserShell = pkgs.fish;
   time.timeZone = "Europe/Bratislava";
 
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "${pkgs.terminus_font}/share/consolefonts/ter-v32n.psf.gz";
-  #  packages = with pkgs; [ terminus-font ];
+    #  packages = with pkgs; [ terminus-font ];
     keyMap = "us";
- #   useXkbConfig = true; # use xkb.options in tty.
-   };
+    #   useXkbConfig = true; # use xkb.options in tty.
+  };
 
-
- # services.power-profiles-daemon.enable = true;
   services.greetd = {
     enable = true;
     settings = {
@@ -45,17 +59,16 @@
         command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time";
       };
     };
-};
+  };
 
   hardware.graphics.enable = true;
-  #boot.initrd.kernelModules = [ "vmwgfx" ];
-  #services.xserver.videoDrivers = [ "vmwgfx" ];
-
   programs.uwsm = {
     enable = true;
   };
+
   programs.hyprland.withUWSM = true;
   programs.hyprland.enable = true;
+  programs.hyprland.xwayland.enable = false;
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -63,41 +76,31 @@
 
   services.libinput.enable = true;
 
-
-   #programs.firefox.enable = true;
-   environment.systemPackages = with pkgs; [
-     vim 
-     telegram-desktop
-     wget
-     git
-     neofetch
-     #power-profiles-daemon
-     #lenovo-legion
-     xfce.thunar
-     lxappearance
-     catppuccin
-   ];
-nixpkgs.config.allowUnfree = true;
-services.xserver.videoDrivers = ["nvidia"];
-hardware.nvidia = {
-  modesetting.enable = true;
-
-  open = false;
-    nvidiaSettings = true;
-  powerManagement.enable = true;
-  powerManagement.finegrained = true;
-
-  prime = {
-    offload.enable = true;
-    offload.enableOffloadCmd = true;
-
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:1:0:0";
-  };
-};
-
-hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #programs.firefox.enable = true;
+  environment.systemPackages = with pkgs; [
+    gcc
+    vim
+    abaddon
+    furmark
+    csharp-ls
+    omnisharp-roslyn
+    csharpier
+    telegram-desktop
+    (dotnetCorePackages.combinePackages [
+      dotnetCorePackages.sdk_10_0-bin
+      dotnetCorePackages.sdk_9_0_3xx
+    ])
+    wget
+    git
+    neofetch
+    #power-profiles-daemon
+    #lenovo-legion
+    xfce.thunar
+    lxappearance
+    catppuccin
+    nixd
+  ];
+  nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = "25.05"; # Did you read the comment?
 }
-
