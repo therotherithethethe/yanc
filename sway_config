@@ -1,0 +1,108 @@
+font pango:Inter 10.000000
+floating_modifier Mod4
+default_border normal 2
+default_floating_border normal 2
+hide_edge_borders none
+focus_wrapping no
+focus_follows_mouse yes
+focus_on_window_activation smart
+mouse_warping output
+workspace_layout default
+workspace_auto_back_and_forth no
+client.focused #88a4d3 #231e18 #cabcb1 #b7ba53 #88a4d3
+client.focused_inactive #9d8b70 #231e18 #cabcb1 #b7ba53 #9d8b70
+client.unfocused #9d8b70 #231e18 #cabcb1 #b7ba53 #9d8b70
+client.urgent #d35c5c #231e18 #cabcb1 #b7ba53 #d35c5c
+client.placeholder #9d8b70 #231e18 #cabcb1 #b7ba53 #9d8b70
+client.background #231e18
+bindsym Mod4+1 workspace number 1
+bindsym Mod4+0 workspace number 10
+bindsym Mod4+2 workspace number 2
+bindsym Mod4+3 workspace number 3
+bindsym Mod4+4 workspace number 4
+bindsym Mod4+5 workspace number 5
+bindsym Mod4+6 workspace number 6
+bindsym Mod4+7 workspace number 7
+bindsym Mod4+8 workspace number 8
+bindsym Mod4+9 workspace number 9
+bindsym Mod4+Down focus down
+bindsym Mod4+Left focus left
+bindsym Mod4+Return exec /nix/store/xr89vplyhipa0gmxnf08pj2jrlxkw864-kitty-0.42.1/bin/kitty
+bindsym Mod4+Right focus right
+bindsym Mod4+Shift+0 move container to workspace number 10
+bindsym Mod4+Shift+1 move container to workspace number 1
+bindsym Mod4+Shift+2 move container to workspace number 2
+bindsym Mod4+Shift+3 move container to workspace number 3
+bindsym Mod4+Shift+4 move container to workspace number 4
+bindsym Mod4+Shift+5 move container to workspace number 5
+bindsym Mod4+Shift+6 move container to workspace number 6
+bindsym Mod4+Shift+7 move container to workspace number 7
+bindsym Mod4+Shift+8 move container to workspace number 8
+bindsym Mod4+Shift+9 move container to workspace number 9
+bindsym Mod4+Shift+Down move down
+bindsym Mod4+Shift+Left move left
+bindsym Mod4+Shift+Right move right
+bindsym Mod4+Shift+Up move up
+bindsym Mod4+Shift+c reload
+bindsym Mod4+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+bindsym Mod4+Shift+h move left
+bindsym Mod4+Shift+j move down
+bindsym Mod4+Shift+k move up
+bindsym Mod4+Shift+l move right
+bindsym Mod4+Shift+minus move scratchpad
+bindsym Mod4+Shift+q kill
+bindsym Mod4+Shift+space floating toggle
+bindsym Mod4+Up focus up
+bindsym Mod4+a focus parent
+bindsym Mod4+b splith
+bindsym Mod4+d exec /nix/store/c0d6w5g510j6mg80kjrvxw0az9wqqfml-dmenu-5.3/bin/dmenu_path | /nix/store/c0d6w5g510j6mg80kjrvxw0az9wqqfml-dmenu-5.3/bin/dmenu | /nix/store/7y59hzi3svdj1xjddjn2k7km96pifcyl-findutils-4.10.0/bin/xargs swaymsg exec --
+bindsym Mod4+e layout toggle split
+bindsym Mod4+f fullscreen toggle
+bindsym Mod4+h focus left
+bindsym Mod4+j focus down
+bindsym Mod4+k focus up
+bindsym Mod4+l focus right
+bindsym Mod4+minus scratchpad show
+bindsym Mod4+q kill
+bindsym Mod4+r mode resize
+bindsym Mod4+s layout stacking
+bindsym Mod4+space focus mode_toggle
+bindsym Mod4+v splitv
+bindsym Mod4+w layout tabbed
+
+input "*" {
+  xkb_layout us,ru,ua,sk
+  xkb_options grp:ctrl_space_toggle,caps:escape
+}
+
+input "13652:64009:Compx_2.4G_Wireless_Receiver" {
+  repeat_delay 250
+  repeat_rate 30
+}
+
+output "*" {
+  bg /nix/store/lrhgskam58syixhrviqrm6n5sp5qbvdi-carbonight.png fill
+}
+
+output "eDP-1" {
+  scale 2
+}
+
+seat "*" {
+
+}
+
+mode "resize" {
+  bindsym Down resize grow height 10 px
+  bindsym Escape mode default
+  bindsym Left resize shrink width 10 px
+  bindsym Return mode default
+  bindsym Right resize grow width 10 px
+  bindsym Up resize shrink height 10 px
+  bindsym h resize shrink width 10 px
+  bindsym j resize grow height 10 px
+  bindsym k resize shrink height 10 px
+  bindsym l resize grow width 10 px
+}
+
+exec "/nix/store/rys6134aqazihxi4g5ayc0ky829v7mf0-dbus-1.14.10/bin/dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP XDG_SESSION_TYPE NIXOS_OZONE_WL XCURSOR_THEME XCURSOR_SIZE; systemctl --user reset-failed && systemctl --user start sway-session.target && swaymsg -mt subscribe '[]' || true && systemctl --user stop sway-session.target"
