@@ -1,18 +1,24 @@
-{ pkgs, config, inputs, lib, ... }:
+{
+  pkgs,
+  config,
+  inputs,
+  lib,
+  ...
+}:
 
 {
-    wayland.windowManager.hyprland = {
+  wayland.windowManager.hyprland = {
     enable = true;
-    package = null; 
+    package = null;
     portalPackage = null;
     systemd.enable = false;
-    xwayland.enable = false;
+    xwayland.enable = true;
     extraConfig = ''
       ${builtins.readFile ./hyprland.conf}
     '';
     settings = {
       "$mod" = "SUPER";
-      
+
       bind = [
         "$mod, RETURN, exec, kitty"
         "$mod, Q, killactive,"

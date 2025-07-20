@@ -13,19 +13,19 @@
     stylix.url = "github:danth/stylix";
     catppuccin.url = "github:catppuccin/nix";
   };
-  
 
-  outputs = { self, nixpkgs, ... } @ inputs: {
-    nixosConfigurations = {
-      "penis" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [ 
-          ./configuration.nix
-        ];
+  outputs =
+    { self, nixpkgs, ... }@inputs:
+    {
+      nixosConfigurations = {
+        "penis" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./configuration.nix
+          ];
+        };
       };
+
     };
-
-
-  };
 }

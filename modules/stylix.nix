@@ -6,9 +6,9 @@
   ];
 
   stylix = {
-    image = ./wallhaven-76pqyo.jpg;
+    image = ../carbonight.png;
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/woodland.yaml";
     fonts = {
       serif = {
         package = pkgs.ibm-plex;
@@ -31,6 +31,9 @@
       firefox = {
         enable = true;
         profileNames = [ "diufku38.default" ];
+      };
+      neovim = {
+        enable = true;
       };
     };
   };
